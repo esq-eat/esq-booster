@@ -15,7 +15,6 @@ android {
         versionName "1.1.0"
     }
 
-    // Single signing config block — referenced by both build types
     signingConfigs {
         debug {
             storeFile file("${System.getProperty('user.home')}/.android/debug.keystore")
@@ -27,8 +26,6 @@ android {
 
     buildTypes {
         debug {
-            // FIX: removed applicationIdSuffix — it changed package to com.esq.booster.debug
-            // which broke the Shizuku provider authority registered with Shizuku service.
             debuggable true
             signingConfig signingConfigs.debug
         }
@@ -36,8 +33,6 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            // Uses debug keystore — sufficient for sideloading.
-            // Replace with a proper release keystore for Play Store distribution.
             signingConfig signingConfigs.debug
         }
     }
@@ -61,8 +56,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
 
     // Shizuku
-    implementation 'dev.rikka.shizuku:api:13.1.5'
-    implementation 'dev.rikka.shizuku:provider:13.1.5'
+    implementation 'dev.rikka.shizuku:api:12.2.0'
+    implementation 'dev.rikka.shizuku:provider:12.2.0'
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
