@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ESQBooster" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/esq_blue</item>
+        <item name="colorPrimaryVariant">@color/esq_blue</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:windowBackground">@color/esq_blue</item>
+        <item name="android:statusBarColor">@color/esq_blue</item>
+        <item name="android:navigationBarColor">@color/card_bg</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+</resources>

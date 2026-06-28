@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="esq_blue">#29ABEF</color>
+    <color name="card_bg">#0D1B2A</color>
+    <color name="fps_good">#00E676</color>
+    <color name="fps_warning">#FFB300</color>
+    <color name="fps_bad">#FF5252</color>
+    <color name="text_secondary">#4A6070</color>
+</resources>
