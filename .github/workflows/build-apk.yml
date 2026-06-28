@@ -24,6 +24,7 @@ jobs:
 
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
+          sed -i 's/\r$//' gradlew
 
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses || true
