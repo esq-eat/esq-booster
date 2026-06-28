@@ -3,7 +3,7 @@ name: Build ESQ Booster APK
 on:
   push:
     branches: [ main, master ]
-  workflow_dispatch:   # Allow manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,18 +22,16 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x gradlew
-          sed -i 's/\r$//' gradlew
-
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses || true
 
-      - name: Download Gradle wrapper jar
+      - name: Prepare gradlew and wrapper
         run: |
+          sed -i 's/\r$//' gradlew
+          chmod +x gradlew
           mkdir -p gradle/wrapper
-          curl -L "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
-            -o gradle/wrapper/gradle-wrapper.jar 2>/dev/null || \
+          curl -fsSL "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
+            -o gradle/wrapper/gradle-wrapper.jar || \
           wget -q "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
             -O gradle/wrapper/gradle-wrapper.jar
 
@@ -46,8 +44,3 @@ jobs:
           name: ESQ-Booster-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
-
-      - name: Show APK info
-        run: |
-          echo "=== APK built ==="
-          ls -lh app/build/outputs/apk/debug/app-debug.apk
