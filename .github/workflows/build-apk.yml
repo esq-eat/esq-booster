@@ -23,18 +23,15 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses || true
 
-      - name: Prepare build
+      - name: Install Gradle 8.2
         run: |
-          sed -i 's/\r//' gradlew
-          chmod +x gradlew
-          mkdir -p gradle/wrapper
-          curl -fsSL \
-            "https://raw.githubusercontent.com/gradle/gradle/v8.2/gradle/wrapper/gradle-wrapper.jar" \
-            -o gradle/wrapper/gradle-wrapper.jar
-          ls -la gradle/wrapper/
+          curl -fL "https://services.gradle.org/distributions/gradle-8.2-bin.zip" \
+            -o /tmp/gradle.zip
+          unzip /tmp/gradle.zip -d /opt/gradle
+          echo "/opt/gradle/gradle-8.2/bin" >> $GITHUB_PATH
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon
 
       - uses: actions/upload-artifact@v4
         with:
